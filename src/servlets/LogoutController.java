@@ -53,7 +53,6 @@ public class LogoutController extends HttpServlet {
 			// this should only happen if you try to goto "/Logout" manually 
 						response.sendRedirect("index.jsp");
 		}
-
 	}
 
 	/**
