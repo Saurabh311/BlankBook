@@ -1,24 +1,19 @@
-package controller;
+package servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database.SQLConnection;
-import model.UserBean;
+import beans.UserBean;
 
 /**
  * Servlet implementation class LogoutController
  */
 @WebServlet("/Logout")
-@ServletSecurity(value = @HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL))
 public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,11 +38,9 @@ public class LogoutController extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			// get the user data
-			UserBean userBean = (UserBean) session.getAttribute("user");
+			UserBean bean = (UserBean) session.getAttribute("user");
 			// and clear it
-			userBean.resetUserBean();
-			
-			SQLConnection.stopFeedConnectionSql();
+			bean.resetUserBean();
 
 			// remove the user
 			session.removeAttribute("User");

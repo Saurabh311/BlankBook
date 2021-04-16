@@ -1,29 +1,21 @@
-package controller;
+package servlets;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database.SQLConnection;
-import model.FeedBean;
-import model.UserBean;
+import beans.UserBean;
 
 /**
  * Servlet implementation class LoginController
  */
 @WebServlet("/Login")
-@ServletSecurity(value = @HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL))
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,21 +37,21 @@ public class LoginController extends HttpServlet {
 		// Check if there is an user in session.
 		if (request.getSession().getAttribute("user") != null) {
 			// get the user out of session 
-			UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+			UserBean userbean = (UserBean) request.getSession().getAttribute("user");
 
 			// Validate username and password again  
-			if (userBean.validate(userBean)) {
+			if (userbean.validate(userbean)) {
 				
 							
-				// get the session and the request to go to the feedpage page 
+				// get the session and the request to go to the success page 
 				HttpSession session = request.getSession();
-				session.setAttribute("user", userBean);
-				request.setAttribute("user", userBean);
+				session.setAttribute("user", userbean);
+				request.setAttribute("user", userbean);
 
-				RequestDispatcher rd = request.getRequestDispatcher("feedpage.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("storyPage.jsp");
 				rd.forward(request, response);
 			} else {
-				// this only happens if the sessionid is removed, manually or because it timed out and you try to go directly to the "feedpage.jsp"
+				// this only happens if the sessionid is removed, manually or because it timed out and you try to go directly to the "success.jsp"
 				//  goto logout to clean up
 			
 				RequestDispatcher rd = request.getRequestDispatcher("Logout");
@@ -69,7 +61,6 @@ public class LoginController extends HttpServlet {
 		} else {
 			// this should only happen if you try to goto "/Login" manually 
 			response.sendRedirect("index.jsp");
-
 		}
 	}
 
@@ -85,29 +76,25 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// Set values of the user bean
-		UserBean userBean = new UserBean();
-		userBean.setEmail(email);
-		userBean.setPassword(password);
+		UserBean userbean = new UserBean();
+		userbean.setEmail(email);
+		userbean.setPassword(password);
 
 		// Check if the email and pass is correct.
-		if (userBean.validate(userBean)) {
+		if (userbean.validate(userbean)) {
 
-			FeedBean feedBean = new FeedBean(SQLConnection.getFeedFromSql());
-
-			
 			// A new thing here "Session", a way to generate a ID to remember some date on
 			// the client
 			HttpSession session = request.getSession(); // its apart of the request
 
 			
 			// the user is logged in or not
-			session.setAttribute("user", userBean);
-			request.setAttribute("user", userBean);
-			
-			request.setAttribute("feedBean", feedBean);
-			
+			session.setAttribute("user", userbean);
+
+			request.setAttribute("user", userbean);
+
 			// RequestDispatcher for when we want to send the request to the new page
-			RequestDispatcher rd = request.getRequestDispatcher("feedpage.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("storyPage.jsp");
 			rd.forward(request, response);
 
 			// response.sendRedirect only goes to the new page, and nothing else

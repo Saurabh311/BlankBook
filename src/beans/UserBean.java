@@ -1,6 +1,6 @@
-package model;
+package beans;
 
-import database.SQLConnection;
+import database.SQLcon;
 
 public class UserBean {
 	private String name, password, email;
@@ -29,10 +29,10 @@ public class UserBean {
 		this.email = email;
 	
 	}
-	public boolean validate(UserBean userBean) {
+	public boolean validate(UserBean bean) {
 		
-		if (SQLConnection.connectSQL()) {
-			return SQLConnection.userSql(userBean);
+		if (SQLcon.connectSQL()) {
+			return SQLcon.userSQL(bean);
     	}
 	
 		return false;
@@ -40,7 +40,8 @@ public class UserBean {
 	public void resetUserBean() {
 		this.password = null;
 		this.name = null;
-		this.email = null;
 	}
 
 }
+
+
