@@ -83,7 +83,7 @@ public class SQLcon {
 	public static void addStoryToSql(String hashTag, String story, String creator) {
 		try {
 			
-			String requestQuery = "INSERT INTO `feed`(`hashTag`, `story`, `creator`) VALUES (?,?,?)";
+			String requestQuery = "INSERT INTO `story`(`hashTag`, `story`, `creator`) VALUES (?,?,?)";
 
 			stmt = storyCon.prepareStatement(requestQuery);
 
@@ -106,7 +106,7 @@ public class SQLcon {
 	public static ResultSet getStoryFromSql() {
 		try {
 			
-			String requestQuery = "SELECT * FROM feed";
+			String requestQuery = "SELECT * FROM story";
 
 			stmt = storyCon.prepareStatement(requestQuery);
 			rs = stmt.executeQuery();

@@ -68,8 +68,8 @@ public class storyController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("hashTag");
-		String hashTag = request.getParameter("story");
+		String message = request.getParameter("story");
+		String hashTag = request.getParameter("hashTag");
 		
 		
 		// Add # to string if it is missing
