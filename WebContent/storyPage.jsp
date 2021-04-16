@@ -61,8 +61,9 @@
 					
 					// Print the feed on the website.
 					out.println("<div class=\"" + divClassForContainer + "\">");
-					out.println("<div class=\"feed-header\"><span class=\"storyUsersName\">" + storyUser + "</span> <span class=\"storyHashtag\">" + storyHashTag + "</span></div>");
-					out.println("<p>" + storyMessage + "</p>");					
+					out.println("<div class=\"feed-header\"><span class=\"storyUsersName\">" + storyUser + "</span></div>");
+					out.println("<p>" + storyMessage + "</p>");		
+					out.println("<span class=\"storyHashtag\">" + storyHashTag + "</span>");
 					out.println("</div>");
 					
 					// This will print either white background with time on the right or darker background with time on left of the feed messages
