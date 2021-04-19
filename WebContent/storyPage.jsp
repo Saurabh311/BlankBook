@@ -40,7 +40,7 @@
 
 
 		<form action="<%=request.getContextPath()%>/Logout" method="post">
-				 <button class="btn btn-danger"type="submit">Log out</button>
+				 <button class="btn btn-danger"type="submit">Logout</button>
 		</form><br>
 		
 		<div>
@@ -93,7 +93,7 @@
 		    
 	     	     	
 	     	<div class="form-floating">
-              <textarea name="story" required="required" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+              <textarea name="story" required="required" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
               <label for="floatingTextarea2">Write the story</label>
            </div><br>
 	
