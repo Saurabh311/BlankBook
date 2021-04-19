@@ -80,7 +80,7 @@ public class storyController extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserBean userbean = (UserBean)session.getAttribute("user");
 		
-		SQLcon.addStoryToSql(message, hashTag, userbean.getName());
+		SQLcon.addStoryToSql(hashTag, message, userbean.getName());
 		
 		StoryBean storyBean = new StoryBean(SQLcon.getStoryFromSql());
 

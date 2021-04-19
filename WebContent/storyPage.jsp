@@ -8,6 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -20,7 +24,6 @@
 			<%
 			// Check to see if the session has a user bean.
 					if (session.getAttribute("user") == null) {
-
 						// if there is not one, goto the logout servlet
 						RequestDispatcher rd = request.getRequestDispatcher("Logout");
 						rd.forward(request, response);
@@ -37,10 +40,12 @@
 
 
 		<form action="<%=request.getContextPath()%>/Logout" method="post">
-				 <button class="w-100 btn btn-lg btn-primary" type="submit">Log out</button>
-		</form>
+				 <button class="btn btn-danger"type="submit">Log out</button>
+		</form><br>
 		
 		<div>
+		
+		
 		
 		<%
 				
@@ -55,18 +60,18 @@
 					
 					// Creating string variables to show which resultSet result is which.
 					String storyUser = resultSet.getString(3);
-					String storyHashTag = resultSet.getString(1);
-					String storyMessage = resultSet.getString(2);
+					String storyHashTag = resultSet.getString(2);
+					String storyMessage = resultSet.getString(1);
 					
 					
 					// Print the feed on the website.
-					out.println("<div class=\"" + divClassForContainer + "\">");
-					out.println("<div class=\"feed-header\"><span class=\"storyUsersName\">" + storyUser + "</span></div>");
-					out.println("<p>" + storyMessage + "</p>");		
-					out.println("<span class=\"storyHashtag\">" + storyHashTag + "</span>");
-					out.println("</div>");
+					out.println("<div class=\"card text-dark bg-warning mb-3\" style=\"max-width: 18rem;\">");
+					out.println("<div class=\"card-header\" class=\"text-primary\"> From: " + storyUser + "</div>");
+					out.println("<div class=\"card-body\"> <h5 class=\"card-title\">" + storyHashTag + "</h5>");		
+					out.println( "<p class=\"card-text\">" + storyMessage + "</p>");
+					out.println("</div></div>");
 					
-					// This will print either white background with time on the right or darker background with time on left of the feed messages
+					
 					if(divClassForContainer.equals("container container-feed")) {
 						divClassForContainer = "container container-feed darker";
 						timePlacement = "time-left";
@@ -75,31 +80,30 @@
 						timePlacement = "time-right";
 					}
 				}				
-				}
-					
-			
-			%>
-		
-		<p>You can post your story</p>  
-		
+				}			
+			%>		
 		
 		
 		    <form action="<%=request.getContextPath()%>/storyController" method="post">
  
-            <p>
-			#HashTag: <input type="text" required="required" name="hashTag" />
-		    </p>
+            <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">#</span>
+             <input type="text" required="required" color="blue" name="hashTag"  class="form-control" placeholder="HashTag" aria-label="Username" aria-describedby="basic-addon1">
+           </div>
 		    
-	     	<p>
-			Story: <textarea rows="10" cols="40" name="story" required="required" placeholder="Input your message here." maxlength="255"></textarea> <br>
-	     	</p>
+	     	     	
+	     	<div class="form-floating">
+              <textarea name="story" required="required" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+              <label for="floatingTextarea2">Write the story</label>
+           </div><br>
 	
-	     	<input type="submit" value="Post" />
+	     	<button type="submit" class="btn btn-success">Post</button>
 
             </form>    		
 
 		</div>
 	</div>
+
 
 
 

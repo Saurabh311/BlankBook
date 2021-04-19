@@ -28,13 +28,14 @@ if (session.getAttribute("user") != null) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
     <link href="css/style.css" rel="stylesheet">
 </head>
-<body>
-	
-	
-<main class="container login">	
+
+<body>	
+<main class="container login"><br><br>	
+    
 		<div class="d-flex justify-content-center h-100">
 			<div class="card card-login">
-				<header class="card-header">
+				<header class="p-3 mb-2 bg-primary text-white" class="card-header">
+				
 					<h3>Sign In <span id="error"></span></h3>
 				</header>
 				
@@ -42,20 +43,20 @@ if (session.getAttribute("user") != null) {
 					<form action="<%=request.getContextPath()%>/Login" method="post">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class="fas fa-user-circle"></i></span>
 							</div>
 							<input type="text" class="form-control" placeholder="Email" name="email" required="required">	
-						</div>
+						</div><br>
 						
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-portrait"></i></span>
+								<span class="input-group-text"><i class="fas fa-key"></i></i></span>
 							</div>
 							<input type="password" class="form-control" placeholder="Password" name="password" required="required">
-						</div>
+						</div><br>
 						
 						<div class="form-group btn_div">
-							<input type="submit" value="Login" class="btn float-right login_btn">
+							<input type="submit" value="Login" class="btn btn-primary"">
 						</div>
 					</form>
 					
