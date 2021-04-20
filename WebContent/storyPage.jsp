@@ -54,8 +54,6 @@
 				if(storyBean != null) {
 				ResultSet resultSet = storyBean.getResultSet();
 				//Print messages
-				String divClassForContainer = "container container-feed";
-				String timePlacement = "time-right";
 				while (resultSet.next()) {
 					
 					// Creating string variables to show which resultSet result is which.
@@ -69,16 +67,9 @@
 					out.println("<div class=\"card-header\" class=\"text-primary\"> From: " + storyUser + "</div>");
 					out.println("<div class=\"card-body\"> <h5 class=\"card-title\">" + storyHashTag + "</h5>");		
 					out.println( "<p class=\"card-text\">" + storyMessage + "</p>");
-					out.println("</div></div>");
+					out.println("</div></div>");				
 					
 					
-					if(divClassForContainer.equals("container container-feed")) {
-						divClassForContainer = "container container-feed darker";
-						timePlacement = "time-left";
-					} else {
-						divClassForContainer = "container container-feed";
-						timePlacement = "time-right";
-					}
 				}				
 				}			
 			%>		
