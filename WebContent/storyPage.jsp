@@ -1,6 +1,5 @@
 <%@page import="beans.UserBean"%>
 <%@page import="beans.StoryBean"%>
-
 <%@page import="java.sql.ResultSet"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -28,54 +27,30 @@
 						RequestDispatcher rd = request.getRequestDispatcher("Logout");
 						rd.forward(request, response);
 					} else {
-						// if there is a session , then all is well  
-
+						// if there is a session , then all is well 
 						// get the bean to unpack the user data
 						UserBean bean = (UserBean) request.getAttribute("user");
-
 						out.print("<h1>Welcome, " + bean.getName() + "</h1>");
 					}
 			%>
 		</div>
 
-
 		<form action="<%=request.getContextPath()%>/Logout" method="post">
-				 <button class="btn btn-danger"type="submit">Logout</button>
+				 <button class="btn btn-danger"type="submit">Logout</button> 
 		</form><br>
+		
+		
+		<div class="input-group mb-3">
+		  <form action="<%=request.getContextPath()%>/Search" method="post">
+             <input name ="search" type="text" class="form-control" placeholder="Write hashtag" aria-label="Recipient's username" aria-describedby="button-addon2">
+             <button type ="submit" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+          </form>
+        </div>
+		
 		
 		<div>
 		
-		
-		
-		<%
-				
-				StoryBean storyBean = (StoryBean)request.getAttribute("storyBean");
-				
-				if(storyBean != null) {
-				ResultSet resultSet = storyBean.getResultSet();
-				//Print messages
-				while (resultSet.next()) {
-					
-					// Creating string variables to show which resultSet result is which.
-					String storyUser = resultSet.getString(3);
-					String storyHashTag = resultSet.getString(2);
-					String storyMessage = resultSet.getString(1);
-					
-					
-					// Print the feed on the website.
-					out.println("<div class=\"card text-dark bg-warning mb-3\" style=\"max-width: 18rem;\">");
-					out.println("<div class=\"card-header\" class=\"text-primary\"> From: " + storyUser + "</div>");
-					out.println("<div class=\"card-body\"> <h5 class=\"card-title\">" + storyHashTag + "</h5>");		
-					out.println( "<p class=\"card-text\">" + storyMessage + "</p>");
-					out.println("</div></div>");				
-					
-					
-				}				
-				}			
-			%>		
-		
-		
-		    <form action="<%=request.getContextPath()%>/storyController" method="post">
+		 <form action="<%=request.getContextPath()%>/storyController" method="post">
  
             <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">#</span>
@@ -90,9 +65,34 @@
 	
 	     	<button type="submit" class="btn btn-success">Post</button>
 
-            </form>    		
-
-		</div>
+            </form> 
+            
+          </div><br>
+				
+			<%				
+				StoryBean storyBean = (StoryBean)request.getAttribute("storyBean");
+				
+				if(storyBean != null) {
+				ResultSet resultSet = storyBean.getResultSet();
+				//Print messages
+				while (resultSet.next()) {
+					
+					// Creating string variables to show which resultSet result is which.
+					String storyUser = resultSet.getString(3);
+					String storyHashTag = resultSet.getString(2);
+					String storyMessage = resultSet.getString(1);
+										
+					// Print the story on the website.
+					out.println("<form action=\"Java Resources/src/servlets/DeleteStoryController\" method=\"post\" class=\"card text-dark bg-warning mb-3\" style=\"max-width: 18rem;\">");
+					out.println("<div class=\"card-header\" class=\"text-primary\"> From: " + storyUser + "</div>");
+					out.println("<div class=\"card-body\"><input type=\"hidden\" name=\"hashTag\" value=storyHashTag /> <h5 class=\"card-title\">" + storyHashTag + "</h5>");		
+					out.println( "<p class=\"card-text\">" + storyMessage + "</p>");					
+					out.println("<button type =\"submit\" class=\"btn btn-danger\">Delete</button>");
+					out.println("</div></form>");							
+				}				
+				}			
+			%>		
+					
 	</div>
 
 

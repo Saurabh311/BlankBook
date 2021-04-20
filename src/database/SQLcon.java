@@ -77,7 +77,6 @@ public class SQLcon {
 
 		}
 		return false;
-
 	}
 	
 	public static void addStoryToSql(String hashTag, String story, String creator) {
@@ -101,6 +100,26 @@ public class SQLcon {
 			System.out.println("SQLState: " + e.getSQLState());
 			System.out.println("VendorError: " + e.getErrorCode());
 		}
+	}
+	
+	public static void deleteStoryFromSql(String hashtag) {
+		try {
+			
+			String requestQuery = "DELETE FROM `story` WHERE HashTag = hashtag";
+
+			stmt = storyCon.prepareStatement(requestQuery);
+			rs = stmt.executeQuery();
+			storyCon.endRequest();			
+			
+			
+			
+		} catch (SQLException e) {
+			System.out.println("getStoryFromSql");
+			System.out.println("SQLException: " + e.getMessage());
+			System.out.println("SQLState: " + e.getSQLState());
+			System.out.println("VendorError: " + e.getErrorCode());
+		}
+		
 	}
 	
 	public static ResultSet getStoryFromSql() {
@@ -133,7 +152,27 @@ public class SQLcon {
 			System.out.println("SQLState: " + e.getSQLState());
 			System.out.println("VendorError: " + e.getErrorCode());
 		}
-	}    
+	}
+
+	public static ResultSet serachStoryFromSql(String search) {
+		try {
+			String requestQuery = "SELECT * FROM story WHERE Story LIKE ? or HashTag LIKE ?";
+			
+			stmt = storyCon.prepareStatement(requestQuery);
+
+			stmt.setString(1, "%"+search+"%");
+			stmt.setString(2, "%"+search+"%");
+
+			rs = stmt.executeQuery(); 
+			return rs;
+		} catch (SQLException e) {
+			System.out.println("stopStoryConnectionSql");
+			System.out.println("SQLException: " + e.getMessage());
+			System.out.println("SQLState: " + e.getSQLState());
+			System.out.println("VendorError: " + e.getErrorCode());
+			return null;
+		}
+	}
 		
 
 }
