@@ -42,7 +42,7 @@
 		
 		<div class="input-group mb-3">
 		  <form action="<%=request.getContextPath()%>/Search" method="post">
-             <input name ="search" type="text" class="form-control" placeholder="Write hashtag" aria-label="Recipient's username" aria-describedby="button-addon2">
+             <input name ="search" type="text" class="form-control" placeholder="Write hashtag or message" aria-label="Recipient's username" aria-describedby="button-addon2"><br>
              <button type ="submit" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
           </form>
         </div>
@@ -83,12 +83,18 @@
 					String storyMessage = resultSet.getString(1);
 										
 					// Print the story on the website.
-					out.println("<form action=\"Java Resources/src/servlets/DeleteStoryController\" method=\"post\" class=\"card text-dark bg-warning mb-3\" style=\"max-width: 18rem;\">");
+					out.println("<div class=\"card text-dark bg-warning mb-3\" style=\"max-width: 18rem;\">");
 					out.println("<div class=\"card-header\" class=\"text-primary\"> From: " + storyUser + "</div>");
-					out.println("<div class=\"card-body\"><input type=\"hidden\" name=\"hashTag\" value=storyHashTag /> <h5 class=\"card-title\">" + storyHashTag + "</h5>");		
+					out.println("<div class=\"card-body\"> <h5 class=\"card-title\">" + storyHashTag + "</h5>");		
 					out.println( "<p class=\"card-text\">" + storyMessage + "</p>");					
-					out.println("<button type =\"submit\" class=\"btn btn-danger\">Delete</button>");
-					out.println("</div></form>");							
+					%>
+					<form action="<%=request.getContextPath()%>/DeleteStoryController" method="post">
+					<input type="hidden" name=hashTag value=<%=storyHashTag%>/>
+					<button type ="submit" class="btn btn-danger">Delete</button>
+					</form>					
+					<%
+					out.println("</div></div>");	
+					
 				}				
 				}			
 			%>		

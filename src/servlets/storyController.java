@@ -37,6 +37,7 @@ public class storyController extends HttpServlet {
 				if (request.getSession().getAttribute("user") != null) {
 					// get the user out of session 
 					UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+					StoryBean storyBean = new StoryBean(SQLcon.getStoryFromSql());
 
 					// Validate username and password again  
 					if (userBean.validate(userBean)) {
@@ -46,6 +47,7 @@ public class storyController extends HttpServlet {
 						HttpSession session = request.getSession();
 						session.setAttribute("user", userBean);
 						request.setAttribute("user", userBean);
+						request.setAttribute("storyBean", storyBean);
 
 						RequestDispatcher rd = request.getRequestDispatcher("storyPage.jsp");
 						rd.forward(request, response);

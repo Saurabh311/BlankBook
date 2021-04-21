@@ -109,9 +109,7 @@ public class SQLcon {
 
 			stmt = storyCon.prepareStatement(requestQuery);
 			rs = stmt.executeQuery();
-			storyCon.endRequest();			
-			
-			
+			storyCon.endRequest();						
 			
 		} catch (SQLException e) {
 			System.out.println("getStoryFromSql");
