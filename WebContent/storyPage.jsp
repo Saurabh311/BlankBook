@@ -43,7 +43,7 @@
 		<div class="input-group mb-3">
 		  <form action="<%=request.getContextPath()%>/Search" method="post">
              <input name ="search" type="text" class="form-control" placeholder="Write hashtag or message" aria-label="Recipient's username" aria-describedby="button-addon2"><br>
-             <button type ="submit" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+             <button type ="submit" type="button" class="btn btn-primary">Search</button>
           </form>
         </div>
 		
