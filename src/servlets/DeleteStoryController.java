@@ -61,8 +61,8 @@ public class DeleteStoryController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String hashTag = request.getParameter("hashTag");
-			
+		String hashTag = request.getParameter("hashTag");	
+		System.out.println(hashTag);	
 			
 		HttpSession session = request.getSession();
 		UserBean userbean = (UserBean)session.getAttribute("user");

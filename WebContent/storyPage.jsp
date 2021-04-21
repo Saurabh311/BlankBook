@@ -79,8 +79,8 @@
 					
 					// Creating string variables to show which resultSet result is which.
 					String storyUser = resultSet.getString(3);
-					String storyHashTag = resultSet.getString(2);
-					String storyMessage = resultSet.getString(1);
+					String storyMessage = resultSet.getString(2);
+					String storyHashTag = resultSet.getString(1);
 										
 					// Print the story on the website.
 					out.println("<div class=\"card text-dark bg-warning mb-3\" style=\"max-width: 18rem;\">");
