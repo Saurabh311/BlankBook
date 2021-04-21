@@ -89,7 +89,7 @@
 					out.println( "<p class=\"card-text\">" + storyMessage + "</p>");					
 					%>
 					<form action="<%=request.getContextPath()%>/DeleteStoryController" method="post">
-					<input type="hidden" name=hashTag value=<%=storyHashTag%>/>
+					<input type="hidden" name=hashTag value=<%=storyHashTag%>>
 					<button type ="submit" class="btn btn-danger">Delete</button>
 					</form>					
 					<%

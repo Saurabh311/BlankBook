@@ -105,10 +105,11 @@ public class SQLcon {
 	public static void deleteStoryFromSql(String hashtag) {
 		try {
 			
-			String requestQuery = "DELETE FROM `story` WHERE HashTag = hashtag";
+			String requestQuery = "DELETE FROM `story` WHERE HashTag= ?";
 
 			stmt = storyCon.prepareStatement(requestQuery);
-			rs = stmt.executeQuery();
+			stmt.setString(1, hashtag);
+			stmt.executeUpdate();
 			storyCon.endRequest();						
 			
 		} catch (SQLException e) {
@@ -164,7 +165,7 @@ public class SQLcon {
 			rs = stmt.executeQuery(); 
 			return rs;
 		} catch (SQLException e) {
-			System.out.println("stopStoryConnectionSql");
+			System.out.println("serachStoryFromSql");
 			System.out.println("SQLException: " + e.getMessage());
 			System.out.println("SQLState: " + e.getSQLState());
 			System.out.println("VendorError: " + e.getErrorCode());
