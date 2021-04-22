@@ -20,61 +20,64 @@ import database.SQLcon;
 @WebServlet("/DeleteStoryController")
 public class DeleteStoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteStoryController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Check if there is an user in session.
-				if (request.getSession().getAttribute("user") != null) {
-
-					// Get the session
-					HttpSession session = request.getSession();
-
-					// get the user data
-					UserBean bean = (UserBean) session.getAttribute("user");
-					// and clear it
-					bean.resetUserBean();
-
-					// remove the user
-					session.removeAttribute("User");
-					// turn off the session
-					session.invalidate();
-					// goto index
-					response.sendRedirect("index.jsp");
-
-				}else {
-					// this should only happen if you try to goto "/Logout" manually 
-								response.sendRedirect("index.jsp");
-				}		
+	public DeleteStoryController() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String hashTag = request.getParameter("hashTag");	
-		System.out.println(hashTag);	
-			
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Check if there is an user in session.
+		if (request.getSession().getAttribute("user") != null) {
+
+			// Get the session
+			HttpSession session = request.getSession();
+
+			// get the user data
+			UserBean bean = (UserBean) session.getAttribute("user");
+			// and clear it
+			bean.resetUserBean();
+
+			// remove the user
+			session.removeAttribute("User");
+			// turn off the session
+			session.invalidate();
+			// goto index
+			response.sendRedirect("index.jsp");
+
+		} else {
+			// this should only happen if you try to goto "/Logout" manually
+			response.sendRedirect("index.jsp");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String hashTag = request.getParameter("hashTag");
+		System.out.println(hashTag);
+
 		HttpSession session = request.getSession();
-		UserBean userbean = (UserBean)session.getAttribute("user");
-		
+		UserBean userbean = (UserBean) session.getAttribute("user");
+
 		SQLcon.deleteStoryFromSql(hashTag);
-		
+
 		StoryBean storyBean = new StoryBean(SQLcon.getStoryFromSql());
 
-		
 		request.setAttribute("user", userbean);
 		request.setAttribute("storyBean", storyBean);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("storyPage.jsp");
 		rd.forward(request, response);
 	}

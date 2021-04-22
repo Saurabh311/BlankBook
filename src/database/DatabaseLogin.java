@@ -13,6 +13,4 @@ public class DatabaseLogin {
 		return uPass;
 	}
 
-	
-
 }

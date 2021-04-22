@@ -4,12 +4,11 @@ import java.sql.ResultSet;
 
 public class StoryBean {
 	private ResultSet resultSet;
-	
-	
+
 	public StoryBean() {
 	}
-	
-	public StoryBean (ResultSet resultSet) {
+
+	public StoryBean(ResultSet resultSet) {
 		this.resultSet = resultSet;
 	}
 
@@ -20,7 +19,5 @@ public class StoryBean {
 	public void setResultSet(ResultSet resultSet) {
 		this.resultSet = resultSet;
 	}
-	
-	
 
 }

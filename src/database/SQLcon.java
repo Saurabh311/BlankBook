@@ -30,7 +30,7 @@ public class SQLcon {
 		try {
 			userCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/users?serverTimezone=UTC",
 					DatabaseLogin.getuName(), DatabaseLogin.getuPass());
-			
+
 			storyCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/story?serverTimezone=UTC",
 					DatabaseLogin.getuName(), DatabaseLogin.getuPass());
 			return true;
@@ -46,7 +46,7 @@ public class SQLcon {
 	}
 
 	public static boolean userSQL(UserBean bean) {
-		
+
 		// test a query
 		try {
 			String requestQuery = "SELECT * FROM users WHERE email = ? and password = ?";
@@ -78,10 +78,10 @@ public class SQLcon {
 		}
 		return false;
 	}
-	
+
 	public static void addStoryToSql(String hashTag, String story, String creator) {
 		try {
-			
+
 			String requestQuery = "INSERT INTO `story`(`hashTag`, `story`, `creator`) VALUES (?,?,?)";
 
 			stmt = storyCon.prepareStatement(requestQuery);
@@ -91,9 +91,9 @@ public class SQLcon {
 			stmt.setString(3, creator);
 
 			stmt.executeUpdate();
-			
+
 			storyCon.endRequest();
-			
+
 		} catch (SQLException e) {
 			System.out.println("addStoryToSql");
 			System.out.println("SQLException: " + e.getMessage());
@@ -101,37 +101,37 @@ public class SQLcon {
 			System.out.println("VendorError: " + e.getErrorCode());
 		}
 	}
-	
+
 	public static void deleteStoryFromSql(String hashtag) {
 		try {
-			
+
 			String requestQuery = "DELETE FROM `story` WHERE HashTag= ?";
 
 			stmt = storyCon.prepareStatement(requestQuery);
 			stmt.setString(1, hashtag);
 			stmt.executeUpdate();
-			storyCon.endRequest();						
-			
+			storyCon.endRequest();
+
 		} catch (SQLException e) {
 			System.out.println("getStoryFromSql");
 			System.out.println("SQLException: " + e.getMessage());
 			System.out.println("SQLState: " + e.getSQLState());
 			System.out.println("VendorError: " + e.getErrorCode());
 		}
-		
+
 	}
-	
+
 	public static ResultSet getStoryFromSql() {
 		try {
-			
+
 			String requestQuery = "SELECT * FROM story";
 
 			stmt = storyCon.prepareStatement(requestQuery);
 			rs = stmt.executeQuery();
-			storyCon.endRequest();			
-			
+			storyCon.endRequest();
+
 			return rs;
-			
+
 		} catch (SQLException e) {
 			System.out.println("getStoryFromSql");
 			System.out.println("SQLException: " + e.getMessage());
@@ -140,11 +140,11 @@ public class SQLcon {
 		}
 		return null;
 	}
-	
+
 	public static void stopStoryConnectionSql() {
-		
+
 		try {
-			storyCon.close();			
+			storyCon.close();
 		} catch (SQLException e) {
 			System.out.println("stopStoryConnectionSql");
 			System.out.println("SQLException: " + e.getMessage());
@@ -156,13 +156,13 @@ public class SQLcon {
 	public static ResultSet serachStoryFromSql(String search) {
 		try {
 			String requestQuery = "SELECT * FROM story WHERE Story LIKE ? or HashTag LIKE ?";
-			
+
 			stmt = storyCon.prepareStatement(requestQuery);
 
-			stmt.setString(1, "%"+search+"%");
-			stmt.setString(2, "%"+search+"%");
+			stmt.setString(1, "%" + search + "%");
+			stmt.setString(2, "%" + search + "%");
 
-			rs = stmt.executeQuery(); 
+			rs = stmt.executeQuery();
 			return rs;
 		} catch (SQLException e) {
 			System.out.println("serachStoryFromSql");
@@ -172,6 +172,5 @@ public class SQLcon {
 			return null;
 		}
 	}
-		
 
 }

@@ -27,21 +27,21 @@ public class UserBean {
 
 	public void setEmail(String email) {
 		this.email = email;
-	
+
 	}
+
 	public boolean validate(UserBean bean) {
-		
+
 		if (SQLcon.connectSQL()) {
 			return SQLcon.userSQL(bean);
-    	}
-	
+		}
+
 		return false;
 	}
+
 	public void resetUserBean() {
 		this.password = null;
 		this.name = null;
 	}
 
 }
-
-
