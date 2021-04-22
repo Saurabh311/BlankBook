@@ -27,6 +27,8 @@ if (session.getAttribute("user") != null) {
     <!-- cookiealert styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
     <link href="css/style.css" rel="stylesheet">
+    
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>	
